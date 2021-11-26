@@ -12,7 +12,11 @@ const transactions = require("./routes/transactions");
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
+
+if (process.env.NODE_ENV === "development") {
+	app.use(morgan("dev"));
+}
 
 app.use("/api/v1/transactions", transactions);
 
@@ -26,3 +30,4 @@ app.listen(
 	)
 );
 //npm run server to start
+// npm run dev to run concurrently
